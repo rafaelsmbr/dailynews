@@ -262,7 +262,6 @@ def rss_feed():
 
         rss = ET.Element("rss")
         rss.set("version", "2.0")
-        rss.set("xmlns:media", MEDIA_NS)
 
         channel = ET.SubElement(rss, "channel")
         ET.SubElement(channel, "title").text       = "Wired AI – enriched"
