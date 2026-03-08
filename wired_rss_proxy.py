@@ -221,9 +221,8 @@ def rss_feed():
             """).fetchall()
 
         # Monta RSS do zero a partir dos dados do banco
-        rss = ET.Element("rss", version="2.0", attrib={
-            "xmlns:dc": "http://purl.org/dc/elements/1.1/",
-        })
+        rss = ET.Element("rss")
+        rss.set("version", "2.0")
         channel = ET.SubElement(rss, "channel")
         ET.SubElement(channel, "title").text       = "Wired AI – enriched"
         ET.SubElement(channel, "link").text        = "https://www.wired.com/tag/ai/"
@@ -236,7 +235,7 @@ def rss_feed():
             ET.SubElement(item, "guid").text        = row["guid"]        or ""
             ET.SubElement(item, "pubDate").text     = row["pub_date"]    or ""
             ET.SubElement(item, "description").text = row["description"] or ""
-            ET.SubElement(item, "{http://purl.org/dc/elements/1.1/}creator").text = row["author"] or ""
+            ET.SubElement(item, "author").text = row["author"] or ""
             ET.SubElement(item, "fullContent").text = row["full_content"] or ""
 
         xml_str = ET.tostring(rss, encoding="unicode", xml_declaration=False)
